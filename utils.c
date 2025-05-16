@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 13:23:59 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/17 02:06:17 by zsalih           ###   ########.fr       */
+/*   Created: 2025/05/17 01:48:17 by zsalih            #+#    #+#             */
+/*   Updated: 2025/05/17 01:50:12 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int ac, char **av)
+void free_map(t_map *map)
 {
-	t_map map;
+	int i;
 
-	if (ac == 2)
+	if (!map || !map->grid)
+		return;
+	i = 0;
+	while (map->grid[i])
 	{
-		if (!has_ber_extension(av[1]))
-		{
-			ft_putendl_fd("Error: Invalid file extension. Use .ber files only.",
-				2);
-			exit(EXIT_FAILURE);
-		}
-        ft_memset(&map, 0, sizeof(t_map));
-		get_map(av[1], &map);
+		free(map->grid[i]);
+		i++;
 	}
-    else
-    {
-        ft_putendl_fd("Usage: ./so_long map.ber", 2);
-        exit(EXIT_FAILURE);
-    }
-    return (0);
+	free(map->grid);
+	map->grid = NULL;
+}
+
+void error_exit(const char *message, t_map *map)
+{
+    if (map)
+        free_map(map);
+    ft_putendl_fd(message, 2);
+    exit(EXIT_FAILURE);
 }
