@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 01:06:30 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/20 14:18:01 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/20 15:36:08 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ static int	check_walls(t_map *map)
 
 void	check_map_validity(t_map *map)
 {
+	if (map->width > MAX_MAP_WIDTH || map->height > MAX_MAP_HEIGHT)
+		error_exit("Error: Map size exceeds maximum limits\n", map);
 	if (!check_rectangular(map))
 		error_exit("Erorr: Map is not rectangular\n", map);
 	if (!check_characters(map))

@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:22:20 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/20 13:48:45 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/20 15:35:38 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_ff
 }				t_ff;
 
 # define TILE_SIZE 32
+# define MAX_MAP_WIDTH 50
+# define MAX_MAP_HEIGHT 50
 
 int				has_ber_extension(const char *filename);
 void			get_map(const char *filename, t_map *map);
