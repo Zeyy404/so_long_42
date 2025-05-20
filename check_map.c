@@ -6,20 +6,20 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 01:06:30 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/17 02:02:40 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/20 14:18:01 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int check_rectangular(t_map *map)
+static int	check_rectangular(t_map *map)
 {
 	int	i;
 
 	i = 0;
 	while (map->grid[i])
 	{
-		if (ft_strlen(map->grid[i]) != map->width)
+		if ((int)ft_strlen(map->grid[i]) != map->width)
 			return (0);
 		i++;
 	}
@@ -28,27 +28,26 @@ static int check_rectangular(t_map *map)
 
 static int	check_characters(t_map *map)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
-	while (map->grid[i++])
+	while (map->grid[++i])
 	{
 		j = 0;
-		while (map->grid[i][j++])
+		while (map->grid[i][++j])
 		{
-			char c = map->grid[i][j];
-			if (c == 'P')
+			if (map->grid[i][j] == 'P')
 			{
 				map->player_count++;
 				map->player_pos.x = j;
 				map->player_pos.y = i;
 			}
-			else if (c == 'E')
+			else if (map->grid[i][j] == 'E')
 				map->exit_count++;
-			else if (c == 'C')
+			else if (map->grid[i][j] == 'C')
 				map->collectible_count++;
-			else if (c != '1' && c != '0')
+			else if (map->grid[i][j] != '1' && map->grid[i][j] != '0')
 				return (0);
 		}
 	}
@@ -66,7 +65,6 @@ static int	check_required_elements(t_map *map)
 static int	check_walls(t_map *map)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (i < map->width)

@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:22:20 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/17 03:18:53 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/20 13:48:45 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "gnl/get_next_line.h"
 # include "libft/libft.h"
 # include <fcntl.h>
+# include <mlx.h>
+# include <stdio.h>
 
 typedef struct s_position
 {
@@ -41,11 +43,14 @@ typedef struct s_ff
 	int			exit_reached;
 }				t_ff;
 
+# define TILE_SIZE 32
+
+int				has_ber_extension(const char *filename);
 void			get_map(const char *filename, t_map *map);
 void			check_map_validity(t_map *map);
 int				check_reachability(t_map *map);
 
 void			free_map(t_map *map);
-void			error_exit(const char *message, t_map *map);
+void			error_exit(char *message, t_map *map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 01:48:17 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/17 01:50:12 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/20 13:25:15 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void free_map(t_map *map)
 	map->grid = NULL;
 }
 
-void error_exit(const char *message, t_map *map)
+void error_exit(char *message, t_map *map)
 {
     if (map)
         free_map(map);
