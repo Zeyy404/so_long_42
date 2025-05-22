@@ -11,6 +11,7 @@ LIBFT_A:= $(LIBFT_DIR)/libft.a
 LIBFT_INC:= -I$(LIBFT_DIR)
 
 SRCS:= so_long.c get_map.c check_map.c flood_fill.c utils.c \
+		setup_hooks.c player.c render_map.c \
 		gnl/get_next_line.c
 
 OBJS:= $(SRCS:.c=.o)
@@ -21,6 +22,8 @@ ifeq ($(UNAME_S),Linux)
 else
 	MLX_FLAGS := -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 endif
+
+all: $(NAME)
 
 $(LIBFT_A):
 	$(MAKE) -C $(LIBFT_DIR)
@@ -35,7 +38,6 @@ $(info OBJS: $(OBJS))
 $(NAME): $(OBJS) $(LIBFT_A) $(MLX_LIB)
 	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft $(MLX_FLAGS) -o $(NAME)
 
-all: $(NAME)
 
 debug: CFLAGS += -fsanitize=address -ggdb3
 debug: all

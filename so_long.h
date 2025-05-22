@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:22:20 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/20 15:35:38 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/22 15:31:18 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_map
 	int			player_count;
 	int			exit_count;
 	int			collectible_count;
+	int			collectible_found;
 	t_position	player_pos;
 }				t_map;
 
@@ -43,16 +44,51 @@ typedef struct s_ff
 	int			exit_reached;
 }				t_ff;
 
+typedef struct s_mlx
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	char		*img_addr;
+	int			img_width;
+	int			img_height;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	t_map		*map;
+	int			move_count;
+	void		*wall_texture;
+	void		*floor_texture;
+	void		*player_texture;
+	void		*exit_texture;
+	void		*collectible_texture;
+}				t_mlx;
+
 # define TILE_SIZE 32
 # define MAX_MAP_WIDTH 50
 # define MAX_MAP_HEIGHT 50
+
+# define KEY_ESC 53
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define ARROW_UP 126
+# define ARROW_DOWN 125
+# define ARROW_LEFT 123
+# define ARROW_RIGHT 124
+# define EVENT_CLOSE 17
 
 int				has_ber_extension(const char *filename);
 void			get_map(const char *filename, t_map *map);
 void			check_map_validity(t_map *map);
 int				check_reachability(t_map *map);
+void			render_map(t_mlx *mlx);
 
 void			free_map(t_map *map);
 void			error_exit(char *message, t_map *map);
+
+void			setup_hooks(t_mlx *mlx);
+void			move_player(t_mlx *mlx, int dx, int dy);
 
 #endif
