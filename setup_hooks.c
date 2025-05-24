@@ -6,27 +6,11 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:09:13 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/22 14:25:30 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/24 00:37:36 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-static void exit_game(t_mlx *mlx)
-{
-	if (mlx->img_ptr)
-		mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr);
-	if (mlx->win_ptr)
-		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-	if (mlx->wall_texture)
-		mlx_destroy_image(mlx->mlx_ptr, mlx->wall_texture);
-	if (mlx->floor_texture)
-		mlx_destroy_image(mlx->mlx_ptr, mlx->floor_texture);
-	if (mlx->player_texture)
-		mlx_destroy_image(mlx->mlx_ptr, mlx->player_texture);
-	free_map(mlx->map);
-	exit(EXIT_SUCCESS);
-}
 
 static int	handle_key(int keycode, t_mlx *mlx)
 {

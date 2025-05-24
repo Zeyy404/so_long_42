@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:22:20 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/22 15:31:18 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/24 02:03:42 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "gnl/get_next_line.h"
 # include "libft/libft.h"
 # include <fcntl.h>
+# include <math.h>
 # include <mlx.h>
 # include <stdio.h>
 
@@ -44,24 +45,25 @@ typedef struct s_ff
 	int			exit_reached;
 }				t_ff;
 
+typedef struct s_texture
+{
+	void		*img;
+	int			width;
+	int			height;
+}				t_texture;
+
 typedef struct s_mlx
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	void		*img_ptr;
-	char		*img_addr;
-	int			img_width;
-	int			img_height;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
 	t_map		*map;
 	int			move_count;
-	void		*wall_texture;
-	void		*floor_texture;
-	void		*player_texture;
-	void		*exit_texture;
-	void		*collectible_texture;
+	int			frame_count;
+	t_texture	wall_texture;
+	t_texture	floor_texture;
+	t_texture	player_texture;
+	t_texture	exit_texture;
+	t_texture	collectible_texture;
 }				t_mlx;
 
 # define TILE_SIZE 32
@@ -90,5 +92,7 @@ void			error_exit(char *message, t_map *map);
 
 void			setup_hooks(t_mlx *mlx);
 void			move_player(t_mlx *mlx, int dx, int dy);
+int				update(t_mlx *mlx);
+void			exit_game(t_mlx *mlx);
 
 #endif
