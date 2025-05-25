@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:23:59 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/24 02:07:14 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/26 00:52:51 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void exit_game(t_mlx *mlx)
 		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
 	if (mlx->wall_texture.img)
 		mlx_destroy_image(mlx->mlx_ptr, mlx->wall_texture.img);
-	if (mlx->floor_texture.img)
-		mlx_destroy_image(mlx->mlx_ptr, mlx->floor_texture.img);
-	if (mlx->player_texture.img)
-		mlx_destroy_image(mlx->mlx_ptr, mlx->player_texture.img);
+	if (mlx->player_texture_idle.img)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->player_texture_idle.img);
+	if (mlx->player_texture_move.img)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->player_texture_move.img);
 	if (mlx->collectible_texture.img)
 		mlx_destroy_image(mlx->mlx_ptr, mlx->collectible_texture.img);
 	if (mlx->exit_texture.img)
@@ -42,6 +42,12 @@ void	start_game(t_map *map)
 	if (!mlx.win_ptr)
 		exit(1);
 	mlx.map = map;
+	if (!init_textures(&mlx))
+	{
+		ft_putendl_fd("Error: Failed to load textures\n", 2);
+		exit(1);
+	}
+	init_starfield(&mlx);
 	setup_hooks(&mlx);
 	mlx_loop_hook(mlx.mlx_ptr, update, &mlx);
 	mlx_loop(mlx.mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:22:20 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/24 02:03:42 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/26 00:49:41 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,24 @@
 # include <math.h>
 # include <mlx.h>
 # include <stdio.h>
+
+# define TILE_SIZE 32
+# define MAX_MAP_WIDTH 50
+# define MAX_MAP_HEIGHT 50
+
+# define TRANSPARENT_COLOR 0xFF00FF
+# define MAX_STARS 200
+
+# define KEY_ESC 53
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define ARROW_UP 126
+# define ARROW_DOWN 125
+# define ARROW_LEFT 123
+# define ARROW_RIGHT 124
+# define EVENT_CLOSE 17
 
 typedef struct s_position
 {
@@ -50,7 +68,20 @@ typedef struct s_texture
 	void		*img;
 	int			width;
 	int			height;
+	int			*pixels;
+	int			bpp;
+	int			line_len;
+	int			endian;
 }				t_texture;
+
+typedef struct s_star
+{
+	int			x;
+	int			y;
+	int			brightness;
+	float		twinkle_freq;
+	float		twinkle_phase;
+}				t_star;
 
 typedef struct s_mlx
 {
@@ -60,32 +91,25 @@ typedef struct s_mlx
 	int			move_count;
 	int			frame_count;
 	t_texture	wall_texture;
-	t_texture	floor_texture;
-	t_texture	player_texture;
+	t_texture	player_texture_idle;
+	t_texture	player_texture_move;
+	t_texture	*current_player_texture;
+	int			player_moving;
 	t_texture	exit_texture;
 	t_texture	collectible_texture;
+	t_texture	floor_texture;
+	t_star		stars[MAX_STARS];
+	int			num_stars;
 }				t_mlx;
-
-# define TILE_SIZE 32
-# define MAX_MAP_WIDTH 50
-# define MAX_MAP_HEIGHT 50
-
-# define KEY_ESC 53
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define ARROW_UP 126
-# define ARROW_DOWN 125
-# define ARROW_LEFT 123
-# define ARROW_RIGHT 124
-# define EVENT_CLOSE 17
 
 int				has_ber_extension(const char *filename);
 void			get_map(const char *filename, t_map *map);
 void			check_map_validity(t_map *map);
 int				check_reachability(t_map *map);
 void			render_map(t_mlx *mlx);
+int				init_textures(t_mlx *mlx);
+void			init_starfield(t_mlx *mlx);
+void			draw_starfield(t_mlx *mlx);
 
 void			free_map(t_map *map);
 void			error_exit(char *message, t_map *map);
