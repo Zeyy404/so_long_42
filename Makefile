@@ -1,8 +1,13 @@
 CC:= cc
 CFLAGS:= -Wall -Werror -Wextra
 NAME:= so_long
+UNAME_S := $(shell uname -s)
 
-MLX_DIR:= minilibx_opengl
+ifeq ($(UNAME_S),Linux)
+	MLX_DIR:= minilibx-linux
+else
+	MLX_DIR:= minilibx_opengl
+endif
 MLX_LIB := $(MLX_DIR)/libmlx.a
 MLX_INC:= -I$(MLX_DIR)
 
@@ -16,7 +21,6 @@ SRCS:= so_long.c get_map.c check_map.c flood_fill.c utils.c \
 
 OBJS:= $(SRCS:.c=.o)
 
-UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	MLX_FLAGS := -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 else
