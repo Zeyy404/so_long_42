@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:22:20 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/26 10:51:09 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/26 11:41:35 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void			draw_starfield(t_mlx *mlx);
 void			draw_enemies(t_mlx *mlx);
 
 void			free_map(t_map *map);
+void			free_textures(t_mlx *mlx);
 void			error_exit(char *message, t_map *map);
 
 void			setup_hooks(t_mlx *mlx);
