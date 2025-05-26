@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 15:30:31 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/26 12:26:46 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/26 18:57:44 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	update(t_mlx *mlx)
 	if (!mlx->player_moving)
 		mlx->current_player_texture = &mlx->player_texture_idle;
 	mlx->player_moving = 0;
-	if (mlx->frame_count % 300 == 0)
+	if (mlx->frame_count % 10 == 0)
 		update_enemies(mlx);
 	render_map(mlx);
 	return (0);

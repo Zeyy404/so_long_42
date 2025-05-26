@@ -2,7 +2,7 @@ CC:= cc
 CFLAGS:= -Wall -Werror -Wextra
 NAME:= so_long
 
-MLX_DIR:= minilibx-linux
+MLX_DIR:= minilibx_opengl
 MLX_LIB := $(MLX_DIR)/libmlx.a
 MLX_INC:= -I$(MLX_DIR)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:42:20 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/26 10:34:24 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/26 18:54:26 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	exit_state(t_mlx *mlx)
 {
-	if (mlx->map->collectible_found == mlx->map->collectible_count)
+	if (mlx->map->collectible_found == mlx->map->collectible_count
+		&& !is_enemy_at(mlx, mlx->map->player_pos.x, mlx->map->player_pos.y))
 	{
 		printf("All collectibles collected!\n");
 		printf("You win in %d moves!\n", mlx->move_count);
@@ -34,9 +35,9 @@ void	exit_state(t_mlx *mlx)
 
 void	move_player(t_mlx *mlx, int dx, int dy)
 {
-	int new_x;
-	int new_y;
-	char next_tile;
+	int		new_x;
+	int		new_y;
+	char	next_tile;
 
 	new_x = mlx->map->player_pos.x + dx;
 	new_y = mlx->map->player_pos.y + dy;
@@ -46,13 +47,17 @@ void	move_player(t_mlx *mlx, int dx, int dy)
 	if (next_tile == 'E')
 		exit_state(mlx);
 	if (next_tile == 'C')
-    {
-        mlx->map->collectible_found++;
-        mlx->map->grid[new_y][new_x] = '0';
-    }
+	{
+		mlx->map->collectible_found++;
+		mlx->map->grid[new_y][new_x] = '0';
+	}
+	mlx->map->grid[mlx->map->player_pos.y][mlx->map->player_pos.x] = '0';
+	mlx->map->grid[new_y][new_x] = 'P';
 	mlx->map->player_pos.x = new_x;
 	mlx->map->player_pos.y = new_y;
 	mlx->move_count++;
 	printf("Moves: %d\n", mlx->move_count);
+	if (is_enemy_at(mlx, new_x, new_y))
+		exit_state(mlx);
 	render_map(mlx);
 }

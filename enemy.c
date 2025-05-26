@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemy.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 09:59:16 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/26 11:07:47 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/26 18:57:55 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	update_enemies(t_mlx *mlx)
 	while (i < mlx->map->num_enemies)
 	{
 		e = &mlx->map->enemies[i];
-        if (mlx->frame_count - e->last_move_frame >= 300)
+        if (mlx->frame_count - e->last_move_frame >= 60)
         {
 		    next_x = e->x + e->dir;
 		    if (next_x >= 0 && next_x < mlx->map->width)
