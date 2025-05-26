@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:22:20 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/26 11:41:35 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/26 12:22:22 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ typedef struct s_mlx
 	int			player_moving;
 	t_texture	exit_texture;
 	t_texture	collectible_texture;
+	t_texture	collectible_glow_texture;
 	t_texture	floor_texture;
 	t_star		stars[MAX_STARS];
 	int			num_stars;

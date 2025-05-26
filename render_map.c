@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 15:30:31 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/26 11:06:54 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/26 12:26:46 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	init_textures(t_mlx *mlx)
 		|| !load_texture(mlx, &mlx->collectible_texture,
 			"textures/collectible.xpm") || !load_texture(mlx,
 			&mlx->exit_texture, "textures/exit.xpm") || !load_texture(mlx,
-			&mlx->enemy_texture, "textures/enemy.xpm"))
+			&mlx->enemy_texture, "textures/enemy.xpm") || !load_texture(mlx,
+			&mlx->collectible_glow_texture, "textures/collectible1.xpm"))
 		return (0);
 	img_width = mlx->map->width * TILE_SIZE;
 	img_height = mlx->map->height * TILE_SIZE;
@@ -100,9 +101,17 @@ void	render_map(t_mlx *mlx)
 					mlx->current_player_texture->img, x * TILE_SIZE, y
 					* TILE_SIZE + offset_y);
 			else if (tile == 'C')
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr,
-					mlx->collectible_texture.img, x * TILE_SIZE, y * TILE_SIZE
-					+ offset_y);
+			{
+				float alpha = (sinf(mlx->frame_count * 0.005f) + 1) / 2;
+				if (alpha < 0.5f)
+					mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr,
+						mlx->collectible_glow_texture.img, x * TILE_SIZE,
+						y * TILE_SIZE + offset_y);
+				else
+					mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr,
+						mlx->collectible_texture.img, x * TILE_SIZE, y * TILE_SIZE
+						+ offset_y);
+			}
 			else if (tile == 'E')
 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr,
 					mlx->exit_texture.img, x * TILE_SIZE, y * TILE_SIZE
