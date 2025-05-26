@@ -11,7 +11,7 @@ LIBFT_A:= $(LIBFT_DIR)/libft.a
 LIBFT_INC:= -I$(LIBFT_DIR)
 
 SRCS:= so_long.c get_map.c check_map.c flood_fill.c utils.c \
-		setup_hooks.c player.c render_map.c starfield.c \
+		setup_hooks.c player.c render_map.c starfield.c enemy.c \
 		gnl/get_next_line.c
 
 OBJS:= $(SRCS:.c=.o)

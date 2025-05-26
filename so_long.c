@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:23:59 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/26 00:52:51 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/26 09:22:45 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,14 @@ void exit_game(t_mlx *mlx)
 		mlx_destroy_image(mlx->mlx_ptr, mlx->wall_texture.img);
 	if (mlx->player_texture_idle.img)
 		mlx_destroy_image(mlx->mlx_ptr, mlx->player_texture_idle.img);
-	if (mlx->player_texture_move.img)
-		mlx_destroy_image(mlx->mlx_ptr, mlx->player_texture_move.img);
+	if (mlx->player_texture_right.img)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->player_texture_right.img);
+	if (mlx->player_texture_left.img)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->player_texture_left.img);
+	if (mlx->player_texture_up.img)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->player_texture_up.img);
+	if (mlx->player_texture_down.img)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->player_texture_down.img);
 	if (mlx->collectible_texture.img)
 		mlx_destroy_image(mlx->mlx_ptr, mlx->collectible_texture.img);
 	if (mlx->exit_texture.img)

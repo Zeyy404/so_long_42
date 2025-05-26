@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 01:06:30 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/20 15:36:08 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/26 09:57:06 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static int	check_rectangular(t_map *map)
 
 static int	check_characters(t_map *map)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map->grid[++i])
@@ -47,6 +47,14 @@ static int	check_characters(t_map *map)
 				map->exit_count++;
 			else if (map->grid[i][j] == 'C')
 				map->collectible_count++;
+			else if (map->grid[i][j] == 'X')
+			{
+				map->enemies[map->num_enemies].x = j;
+				map->enemies[map->num_enemies].y = i;
+				map->enemies[map->num_enemies].dir = 1;
+				map->num_enemies++;
+				map->grid[i][j] = '0';
+			}
 			else if (map->grid[i][j] != '1' && map->grid[i][j] != '0')
 				return (0);
 		}

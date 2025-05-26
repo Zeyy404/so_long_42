@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:09:13 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/26 00:48:54 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/26 09:20:18 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,30 @@ static int	handle_key(int keycode, t_mlx *mlx)
 {
 	if (keycode == KEY_ESC)
 		exit_game(mlx);
-	else if (keycode == KEY_W || keycode == ARROW_UP
-		|| keycode == KEY_S || keycode == ARROW_DOWN
-		|| keycode == KEY_A || keycode == ARROW_LEFT
-		|| keycode == KEY_D || keycode == ARROW_RIGHT)
+	else if (keycode == KEY_W || keycode == ARROW_UP)
 	{
 		mlx->player_moving = 1;
-		mlx->current_player_texture = &mlx->player_texture_move;
-	}
-	else if (keycode == KEY_W || keycode == ARROW_UP)
+		mlx->current_player_texture = &mlx->player_texture_up;
 		move_player(mlx, 0, -1);
+	}
 	else if (keycode == KEY_S || keycode == ARROW_DOWN)
+	{
+		mlx->player_moving = 1;
+		mlx->current_player_texture = &mlx->player_texture_down;
 		move_player(mlx, 0, 1);
+	}
 	else if (keycode == KEY_A || keycode == ARROW_LEFT)
+	{
+		mlx->player_moving = 1;
+		mlx->current_player_texture = &mlx->player_texture_left;
 		move_player(mlx, -1, 0);
+	}
 	else if (keycode == KEY_D || keycode == ARROW_RIGHT)
+	{
+		mlx->player_moving = 1;
+		mlx->current_player_texture = &mlx->player_texture_right;
 		move_player(mlx, 1, 0);
+	}
 	return (0);
 }
 

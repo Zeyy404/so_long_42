@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 15:30:31 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/26 00:51:55 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/26 11:06:54 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	update(t_mlx *mlx)
 	if (!mlx->player_moving)
 		mlx->current_player_texture = &mlx->player_texture_idle;
 	mlx->player_moving = 0;
+	if (mlx->frame_count % 300 == 0)
+		update_enemies(mlx);
 	render_map(mlx);
 	return (0);
 }
@@ -44,10 +46,15 @@ int	init_textures(t_mlx *mlx)
 
 	if (!load_texture(mlx, &mlx->wall_texture, "textures/wall.xpm")
 		|| !load_texture(mlx, &mlx->player_texture_idle, "textures/player.xpm")
-		|| !load_texture(mlx, &mlx->player_texture_move,
+		|| !load_texture(mlx, &mlx->player_texture_right,
 			"textures/player1.xpm") || !load_texture(mlx,
-			&mlx->collectible_texture, "textures/collectible.xpm")
-		|| !load_texture(mlx, &mlx->exit_texture, "textures/exit.xpm"))
+			&mlx->player_texture_left, "textures/player2.xpm")
+		|| !load_texture(mlx, &mlx->player_texture_up, "textures/player3.xpm")
+		|| !load_texture(mlx, &mlx->player_texture_down, "textures/player4.xpm")
+		|| !load_texture(mlx, &mlx->collectible_texture,
+			"textures/collectible.xpm") || !load_texture(mlx,
+			&mlx->exit_texture, "textures/exit.xpm") || !load_texture(mlx,
+			&mlx->enemy_texture, "textures/enemy.xpm"))
 		return (0);
 	img_width = mlx->map->width * TILE_SIZE;
 	img_height = mlx->map->height * TILE_SIZE;
@@ -90,8 +97,8 @@ void	render_map(t_mlx *mlx)
 					+ offset_y);
 			else if (tile == 'P')
 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr,
-					mlx->current_player_texture->img, x * TILE_SIZE, y * TILE_SIZE
-					+ offset_y);
+					mlx->current_player_texture->img, x * TILE_SIZE, y
+					* TILE_SIZE + offset_y);
 			else if (tile == 'C')
 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr,
 					mlx->collectible_texture.img, x * TILE_SIZE, y * TILE_SIZE
@@ -104,4 +111,5 @@ void	render_map(t_mlx *mlx)
 		}
 		y++;
 	}
+	draw_enemies(mlx);
 }

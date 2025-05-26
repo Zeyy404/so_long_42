@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:22:20 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/26 00:49:41 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/26 10:51:09 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
+# include <stdbool.h>
 # include <stdio.h>
 
 # define TILE_SIZE 32
@@ -26,6 +27,7 @@
 
 # define TRANSPARENT_COLOR 0xFF00FF
 # define MAX_STARS 200
+# define MAX_ENEMIES 10
 
 # define KEY_ESC 53
 # define KEY_W 13
@@ -44,6 +46,21 @@ typedef struct s_position
 	int			y;
 }				t_position;
 
+typedef struct s_ff
+{
+	char		**grid;
+	int			collectibles_found;
+	int			exit_reached;
+}				t_ff;
+
+typedef struct s_enemy
+{
+	int			x;
+	int			y;
+	int			dir;
+	int			last_move_frame;
+}				t_enemy;
+
 typedef struct s_map
 {
 	char		**grid;
@@ -53,15 +70,10 @@ typedef struct s_map
 	int			exit_count;
 	int			collectible_count;
 	int			collectible_found;
+	t_enemy		enemies[MAX_ENEMIES];
+	int			num_enemies;
 	t_position	player_pos;
 }				t_map;
-
-typedef struct s_ff
-{
-	char		**grid;
-	int			collectibles_found;
-	int			exit_reached;
-}				t_ff;
 
 typedef struct s_texture
 {
@@ -90,9 +102,13 @@ typedef struct s_mlx
 	t_map		*map;
 	int			move_count;
 	int			frame_count;
+	t_texture	enemy_texture;
 	t_texture	wall_texture;
 	t_texture	player_texture_idle;
-	t_texture	player_texture_move;
+	t_texture	player_texture_right;
+	t_texture	player_texture_left;
+	t_texture	player_texture_up;
+	t_texture	player_texture_down;
 	t_texture	*current_player_texture;
 	int			player_moving;
 	t_texture	exit_texture;
@@ -110,13 +126,17 @@ void			render_map(t_mlx *mlx);
 int				init_textures(t_mlx *mlx);
 void			init_starfield(t_mlx *mlx);
 void			draw_starfield(t_mlx *mlx);
+void			draw_enemies(t_mlx *mlx);
 
 void			free_map(t_map *map);
 void			error_exit(char *message, t_map *map);
 
 void			setup_hooks(t_mlx *mlx);
 void			move_player(t_mlx *mlx, int dx, int dy);
+bool			is_enemy_at(t_mlx *mlx, int x, int y);
+void			update_enemies(t_mlx *mlx);
 int				update(t_mlx *mlx);
+void			exit_state(t_mlx *mlx);
 void			exit_game(t_mlx *mlx);
 
 #endif
