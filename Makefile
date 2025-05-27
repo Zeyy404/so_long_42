@@ -15,6 +15,10 @@ LIBFT_DIR:= libft
 LIBFT_A:= $(LIBFT_DIR)/libft.a
 LIBFT_INC:= -I$(LIBFT_DIR)
 
+FT_PRINTF_DIR:= ft_printf
+FT_PRINTF_A:= $(FT_PRINTF_DIR)/libftprintf.a
+FT_PRINTF_INC:= -I$(FT_PRINTF_DIR)
+
 SRCS:= so_long.c get_map.c check_map.c flood_fill.c utils.c \
 		setup_hooks.c player.c render_map.c starfield.c enemy.c \
 		gnl/get_next_line.c
@@ -36,11 +40,14 @@ $(LIBFT_A):
 $(MLX_LIB):
 	$(MAKE) -C $(MLX_DIR)
 
+$(FT_PRINTF_A):
+	$(MAKE) -C $(FT_PRINTF_DIR)
+
 $(info SRCS: $(SRCS))
 $(info OBJS: $(OBJS))
 
-$(NAME): $(OBJS) $(LIBFT_A) $(MLX_LIB)
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft $(MLX_FLAGS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT_A) $(MLX_LIB) $(FT_PRINTF_A)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf $(MLX_FLAGS) -o $(NAME)
 
 
 debug: CFLAGS += -fsanitize=address -ggdb3
@@ -48,17 +55,19 @@ debug: all
 
 %.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(LIBFT_INC) $(MLX_INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(LIBFT_INC) $(MLX_INC) $(FT_PRINTF_INC) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS)
 	$(MAKE) clean -C $(LIBFT_DIR)
 	$(MAKE) clean -C $(MLX_DIR)
+	$(MAKE) clean -C $(FT_PRINTF_DIR)
 
 fclean: clean
 	rm -rf $(NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 	$(MAKE) clean -C $(MLX_DIR)
+	$(MAKE) fclean -C $(FT_PRINTF_DIR)
 
 re: fclean all
 
