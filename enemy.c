@@ -6,7 +6,7 @@
 /*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 09:59:16 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/26 18:57:55 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/28 10:27:09 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	update_enemies(t_mlx *mlx)
 	int		next_x;
 	int		i;
 
-	i = 0;
-	while (i < mlx->map->num_enemies)
+	i = -1;
+	while (++i < mlx->map->num_enemies)
 	{
 		e = &mlx->map->enemies[i];
         if (mlx->frame_count - e->last_move_frame >= 60)
@@ -44,7 +44,6 @@ void	update_enemies(t_mlx *mlx)
                 e->dir *= -1;
             e->last_move_frame = mlx->frame_count;
         }
-		i++;
 	}
 	if (is_enemy_at(mlx, mlx->map->player_pos.x, mlx->map->player_pos.y))
 		exit_state(mlx);

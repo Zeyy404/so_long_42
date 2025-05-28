@@ -6,7 +6,7 @@
 /*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:22:20 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/27 08:08:50 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/28 11:02:22 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@
 # include <stdio.h>
 
 # define TILE_SIZE 32
-# define MAX_MAP_WIDTH 50
-# define MAX_MAP_HEIGHT 50
+# define MAX_MAP_WIDTH 64
+# define MAX_MAP_HEIGHT 32
 
-# define TRANSPARENT_COLOR 0xFF00FF
 # define MAX_STARS 200
 # define MAX_ENEMIES 10
 

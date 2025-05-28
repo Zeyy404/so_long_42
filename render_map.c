@@ -6,7 +6,7 @@
 /*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 15:30:31 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/26 18:57:44 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/28 10:48:32 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,10 @@ void	render_map(t_mlx *mlx)
 	int		x;
 	int		y;
 	char	tile;
-	float	base_freq;
 	float	time;
-	float	phase_y;
 	int		offset_y;
 
-	base_freq = 0.002f;
-	time = mlx->frame_count * base_freq;
+	time = mlx->frame_count * 0.002f;
 	draw_starfield(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->floor_texture.img,
 		0, 0);
@@ -90,8 +87,7 @@ void	render_map(t_mlx *mlx)
 		while (x < mlx->map->width)
 		{
 			tile = mlx->map->grid[y][x];
-			phase_y = y * 0.5f;
-			offset_y = roundf(cos(time + phase_y) * 1.7f);
+			offset_y = roundf(cos(time + y * 0.5f) * 1.7f);
 			if (tile == '1')
 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr,
 					mlx->wall_texture.img, x * TILE_SIZE, y * TILE_SIZE
@@ -102,7 +98,7 @@ void	render_map(t_mlx *mlx)
 					* TILE_SIZE + offset_y);
 			else if (tile == 'C')
 			{
-				float alpha = (sinf(mlx->frame_count * 0.005f) + 1) / 2;
+				float alpha = (sinf(mlx->frame_count * 0.08f) + 1) / 2;
 				if (alpha < 0.5f)
 					mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr,
 						mlx->collectible_glow_texture.img, x * TILE_SIZE,
@@ -121,4 +117,9 @@ void	render_map(t_mlx *mlx)
 		y++;
 	}
 	draw_enemies(mlx);
+	char *move_str = ft_itoa(mlx->move_count);
+	char *display = ft_strjoin("Moves: ", move_str);
+	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 10, 20, 0xFFFFFF, display);
+	free(move_str);
+	free(display);
 }
