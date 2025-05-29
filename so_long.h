@@ -6,16 +6,16 @@
 /*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:22:20 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/28 11:02:22 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/29 15:40:44 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include "ft_printf/ft_printf.h"
 # include "gnl/get_next_line.h"
 # include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
@@ -90,10 +90,13 @@ typedef struct s_star
 {
 	int			x;
 	int			y;
-	int			brightness;
-	float		twinkle_freq;
-	float		twinkle_phase;
 }				t_star;
+
+typedef struct s_animation
+{
+	float		alpha;
+	int			offset;
+}				t_animation;
 
 typedef struct s_mlx
 {
@@ -128,13 +131,16 @@ int				init_textures(t_mlx *mlx);
 void			init_starfield(t_mlx *mlx);
 void			draw_starfield(t_mlx *mlx);
 void			draw_enemies(t_mlx *mlx);
+void			init_enemy(t_map *map, int i, int j);
 
 void			free_map(t_map *map);
 void			free_textures(t_mlx *mlx);
 void			error_exit(char *message, t_map *map);
+void			putstr_on_screen(t_mlx *mlx);
 
 void			setup_hooks(t_mlx *mlx);
 void			move_player(t_mlx *mlx, int dx, int dy);
+void			init_player(t_map *map, int i, int j);
 bool			is_enemy_at(t_mlx *mlx, int x, int y);
 void			update_enemies(t_mlx *mlx);
 int				update(t_mlx *mlx);

@@ -6,7 +6,7 @@
 /*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:42:20 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/26 18:54:26 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/29 08:57:08 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ void	exit_state(t_mlx *mlx)
 		printf("You lose! Failed to collect all collectibles!\n");
 		exit_game(mlx);
 	}
+}
+
+void	init_player(t_map *map, int i, int j)
+{
+	map->player_count++;
+	map->player_pos.x = j;
+	map->player_pos.y = i;
 }
 
 void	move_player(t_mlx *mlx, int dx, int dy)

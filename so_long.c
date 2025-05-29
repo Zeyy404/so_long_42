@@ -6,13 +6,13 @@
 /*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:23:59 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/27 09:07:07 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/29 09:17:33 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void exit_game(t_mlx *mlx)
+void	exit_game(t_mlx *mlx)
 {
 	if (mlx->win_ptr)
 		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
@@ -29,7 +29,8 @@ void	start_game(t_map *map)
 	mlx.mlx_ptr = mlx_init();
 	if (!mlx.mlx_ptr)
 		exit(1);
-	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, map->width * TILE_SIZE, map->height * TILE_SIZE, "so_long");
+	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, map->width * TILE_SIZE,
+			map->height * TILE_SIZE, "so_long");
 	if (!mlx.win_ptr)
 		exit(1);
 	mlx.map = map;
@@ -46,7 +47,7 @@ void	start_game(t_map *map)
 
 int	main(int ac, char **av)
 {
-	t_map map;
+	t_map	map;
 
 	if (ac == 2)
 	{
@@ -56,14 +57,14 @@ int	main(int ac, char **av)
 				2);
 			exit(EXIT_FAILURE);
 		}
-        ft_memset(&map, 0, sizeof(t_map));
+		ft_memset(&map, 0, sizeof(t_map));
 		get_map(av[1], &map);
 	}
-    else
-    {
-        ft_putendl_fd("Usage: ./so_long map.ber", 2);
-        exit(EXIT_FAILURE);
-    }
+	else
+	{
+		ft_putendl_fd("Usage: ./so_long map.ber", 2);
+		exit(EXIT_FAILURE);
+	}
 	start_game(&map);
-    return (0);
+	return (0);
 }

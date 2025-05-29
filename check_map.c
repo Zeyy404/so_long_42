@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 01:06:30 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/26 09:57:06 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/29 08:58:56 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,13 @@ static int	check_characters(t_map *map)
 		while (map->grid[i][++j])
 		{
 			if (map->grid[i][j] == 'P')
-			{
-				map->player_count++;
-				map->player_pos.x = j;
-				map->player_pos.y = i;
-			}
+				init_player(map, i, j);
 			else if (map->grid[i][j] == 'E')
 				map->exit_count++;
 			else if (map->grid[i][j] == 'C')
 				map->collectible_count++;
 			else if (map->grid[i][j] == 'X')
-			{
-				map->enemies[map->num_enemies].x = j;
-				map->enemies[map->num_enemies].y = i;
-				map->enemies[map->num_enemies].dir = 1;
-				map->num_enemies++;
-				map->grid[i][j] = '0';
-			}
+				init_enemy(map, i, j);
 			else if (map->grid[i][j] != '1' && map->grid[i][j] != '0')
 				return (0);
 		}
