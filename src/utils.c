@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 01:48:17 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/29 15:34:21 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/29 23:57:27 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ void	free_textures(t_mlx *mlx)
 
 void	putstr_on_screen(t_mlx *mlx)
 {
-	char *move_str;
-	char *display;
+	char	*move_str;
+	char	*display;
+
 	move_str = ft_itoa(mlx->move_count);
 	display = ft_strjoin("Moves: ", move_str);
 	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 10, 20, 0xFFFFFF, display);

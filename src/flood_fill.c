@@ -6,7 +6,7 @@
 /*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 02:04:58 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/17 03:34:49 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/29 23:56:27 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ static char	**copy_grid(char **grid, int height)
 
 static void	free_grid(char **grid, int height)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (i < height)
 		free(grid[i++]);
 	free(grid);
@@ -64,7 +66,7 @@ static void	flood_fill(t_map *map, t_ff *ff_info, int x, int y)
 
 int	check_reachability(t_map *map)
 {
-	t_ff ff_info;
+	t_ff	ff_info;
 
 	ff_info.collectibles_found = 0;
 	ff_info.exit_reached = 0;

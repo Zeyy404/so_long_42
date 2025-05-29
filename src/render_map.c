@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 15:30:31 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/29 15:42:01 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/30 00:08:21 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	update(t_mlx *mlx)
 	return (0);
 }
 
-int	load_texture(t_mlx *mlx, t_texture *tex, char *path)
+static int	load_texture(t_mlx *mlx, t_texture *tex, char *path)
 {
 	tex->img = mlx_xpm_file_to_image(mlx->mlx_ptr, path, &tex->width,
 			&tex->height);
@@ -39,36 +39,36 @@ int	load_texture(t_mlx *mlx, t_texture *tex, char *path)
 
 int	init_textures(t_mlx *mlx)
 {
-	int	img_width;
-	int	img_height;
-
-	if (!load_texture(mlx, &mlx->wall_texture, "textures/wall.xpm")
-		|| !load_texture(mlx, &mlx->player_texture_idle, "textures/player.xpm")
-		|| !load_texture(mlx, &mlx->player_texture_right,
-			"textures/player1.xpm") || !load_texture(mlx,
-			&mlx->player_texture_left, "textures/player2.xpm")
-		|| !load_texture(mlx, &mlx->player_texture_up, "textures/player3.xpm")
-		|| !load_texture(mlx, &mlx->player_texture_down, "textures/player4.xpm")
-		|| !load_texture(mlx, &mlx->collectible_texture,
-			"textures/collectible.xpm") || !load_texture(mlx,
-			&mlx->exit_texture, "textures/exit.xpm") || !load_texture(mlx,
-			&mlx->enemy_texture, "textures/enemy.xpm") || !load_texture(mlx,
-			&mlx->collectible_glow_texture, "textures/collectible1.xpm"))
+	if (!load_texture(mlx, &mlx->wall_texture, "textures_64/wall.xpm")
+		|| !load_texture(mlx, &mlx->player_texture_idle,
+			"textures_64/player.xpm") || !load_texture(mlx,
+			&mlx->player_texture_right, "textures_64/player1.xpm")
+		|| !load_texture(mlx, &mlx->player_texture_left,
+			"textures_64/player2.xpm") || !load_texture(mlx,
+			&mlx->player_texture_up, "textures_64/player3.xpm")
+		|| !load_texture(mlx, &mlx->player_texture_down,
+			"textures_64/player4.xpm") || !load_texture(mlx,
+			&mlx->collectible_texture, "textures_64/collectible.xpm")
+		|| !load_texture(mlx, &mlx->exit_texture, "textures_64/exit.xpm")
+		|| !load_texture(mlx, &mlx->enemy_texture, "textures_64/enemy.xpm")
+		|| !load_texture(mlx, &mlx->collectible_glow_texture,
+			"textures_64/collectible1.xpm"))
 		return (0);
-	img_width = mlx->map->width * TILE_SIZE;
-	img_height = mlx->map->height * TILE_SIZE;
-	mlx->floor_texture.img = mlx_new_image(mlx->mlx_ptr, img_width, img_height);
+	mlx->floor_texture.width = mlx->map->width * TILE_SIZE;
+	mlx->floor_texture.height = mlx->map->height * TILE_SIZE;
+	mlx->floor_texture.img = mlx_new_image(mlx->mlx_ptr,
+			mlx->floor_texture.width, mlx->floor_texture.height);
 	mlx->floor_texture.pixels = (int *)mlx_get_data_addr(mlx->floor_texture.img,
 			&mlx->floor_texture.bpp, &mlx->floor_texture.line_len,
 			&mlx->floor_texture.endian);
-	mlx->floor_texture.width = img_width;
-	mlx->floor_texture.height = img_height;
+	mlx->floor_texture.width = mlx->floor_texture.width;
+	mlx->floor_texture.height = mlx->floor_texture.height;
 	return (1);
 }
 
 static void	assign_texture(t_mlx *mlx, char tile, int x, int y)
 {
-	t_animation anime;
+	t_animation	anime;
 
 	anime.offset = roundf(cos(mlx->frame_count * 0.002f + y * 0.5f) * 1.7f);
 	if (tile == '1')

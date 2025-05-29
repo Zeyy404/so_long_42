@@ -19,8 +19,8 @@ FT_PRINTF_DIR:= ft_printf
 FT_PRINTF_A:= $(FT_PRINTF_DIR)/libftprintf.a
 FT_PRINTF_INC:= -I$(FT_PRINTF_DIR)
 
-SRCS:= so_long.c get_map.c check_map.c flood_fill.c utils.c \
-		setup_hooks.c player.c render_map.c starfield.c enemy.c \
+SRCS:= src/so_long.c src/get_map.c src/check_map.c src/flood_fill.c src/utils.c \
+		src/setup_hooks.c src/player.c src/render_map.c src/starfield.c src/enemy.c \
 		gnl/get_next_line.c
 
 OBJS:= $(SRCS:.c=.o)

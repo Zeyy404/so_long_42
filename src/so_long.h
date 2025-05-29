@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: zsalih < zsalih@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:22:20 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/29 15:40:44 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/29 23:55:02 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "ft_printf/ft_printf.h"
-# include "gnl/get_next_line.h"
-# include "libft/libft.h"
+# include "../ft_printf/ft_printf.h"
+# include "../gnl/get_next_line.h"
+# include "../libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
 # include <stdbool.h>
 # include <stdio.h>
 
-# define TILE_SIZE 32
+# define TILE_SIZE 64
 # define MAX_MAP_WIDTH 64
 # define MAX_MAP_HEIGHT 32
 
