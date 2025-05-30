@@ -6,7 +6,7 @@
 /*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:42:20 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/30 12:46:59 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/29 08:57:08 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 void	exit_state(t_mlx *mlx)
 {
-	if (mlx->map->collectible_found == mlx->map->collectible_count)
+	if (mlx->map->collectible_found == mlx->map->collectible_count
+		&& !is_enemy_at(mlx, mlx->map->player_pos.x, mlx->map->player_pos.y))
 	{
 		printf("All collectibles collected!\n");
 		printf("You win in %d moves!\n", mlx->move_count);
+		exit_game(mlx);
+	}
+	else if (is_enemy_at(mlx, mlx->map->player_pos.x, mlx->map->player_pos.y))
+	{
+		printf("You lose! You've been captured by the enemies!\n");
 		exit_game(mlx);
 	}
 	else
@@ -58,5 +64,7 @@ void	move_player(t_mlx *mlx, int dx, int dy)
 	mlx->map->player_pos.y = new_y;
 	mlx->move_count++;
 	printf("Moves: %d\n", mlx->move_count);
+	if (is_enemy_at(mlx, new_x, new_y))
+		exit_state(mlx);
 	render_map(mlx);
 }
