@@ -26,8 +26,8 @@ SRCS:= src/so_long.c src/get_map.c src/check_map.c src/flood_fill.c src/utils.c 
 
 OBJS:= $(SRCS:.c=.o)
 
-BONUS:= src/so_long.c src/get_map.c bonus/check_map.c src/flood_fill.c bonus/utils.c \
-		src/setup_hooks.c bonus/player.c bonus/render_map.c src/starfield.c bonus/enemy.c \
+BONUS:= src/so_long.c src/get_map.c bonus/check_map_bonus.c src/flood_fill.c bonus/utils_bonus.c \
+		src/setup_hooks.c bonus/player_bonus.c bonus/render_map_bonus.c src/starfield.c bonus/enemy_bonus.c \
 		gnl/get_next_line.c
 
 OBJSB:= $(BONUS:.c=.o)
