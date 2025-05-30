@@ -6,7 +6,7 @@
 /*   By: zsalih <zsalih@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 15:30:31 by zsalih            #+#    #+#             */
-/*   Updated: 2025/05/30 12:51:56 by zsalih           ###   ########.fr       */
+/*   Updated: 2025/05/30 16:03:17 by zsalih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ int	init_textures(t_mlx *mlx)
 	mlx->floor_texture.pixels = (int *)mlx_get_data_addr(mlx->floor_texture.img,
 			&mlx->floor_texture.bpp, &mlx->floor_texture.line_len,
 			&mlx->floor_texture.endian);
-	mlx->floor_texture.width = mlx->floor_texture.width;
-	mlx->floor_texture.height = mlx->floor_texture.height;
 	return (1);
 }
 
